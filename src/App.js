@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Box } from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
@@ -12,27 +12,27 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 import AddIcon from "@mui/icons-material/Add";
 import GraphIcon from "@mui/icons-material/BarChart";
 
-const Home = () => <h1>Welcome to GDG Management Tool</h1>;
-const CreateGDG = () => <h1>Create GDG Base</h1>;
-const ListGenerations = () => <h1>List Generations</h1>;
-const ModifyAttributes = () => <h1>Modify Attributes</h1>;
-const DeleteGeneration = () => <h1>Delete Generation or Base</h1>;
-const RenameGDG = () => <h1>Rename GDG Base</h1>;
-const ViewMetadata = () => <h1>View Metadata</h1>;
-const ArchiveGenerations = () => <h1>Archive Generations</h1>;
-const AddTransactionLogs = () => <h1>Add Transaction Logs</h1>;
-const GraphicalRepresentation = () => <h1>Graphical Representation</h1>;
-
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
+
+  const menuItemStyles = (path) => ({
+    backgroundColor: location.pathname === path ? "#0d47a1" : "inherit",
+    color: location.pathname === path ? "#fff" : "#0d47a1",
+    borderRadius: "8px",
+    margin: "5px 5px",
+    padding: "10px 10px",
+    transition: "background-color 0.3s ease, color 0.3s ease",
+  });
 
   return (
-    <Box sx={{ display: "flex", backgroundColor: "#f8fbff", minHeight: "100vh" }}>
+    <Box sx={{ display: "flex",  background: "linear-gradient(135deg,rgb(211, 226, 247), #e3f2fd, #d1e8ff)" , minHeight: "100vh" }}>
       <Sidebar
         collapsed={collapsed}
         transitionDuration={300}
         rootStyles={{
           "& .ps-sidebar-container": {
+            position: "fixed", 
             height: "100vh",
             width: collapsed ? "70px" : "280px",
             background: "linear-gradient(145deg, #e3f2fd, #bbdefb)",
@@ -45,24 +45,49 @@ const App = () => {
         }}
       >
         <Menu>
-          {/* Toggle Button Inside Menu */}
-          <MenuItem
-            icon={<MenuRoundedIcon style={{ cursor: "pointer" }} onClick={() => setCollapsed(!collapsed)} />}
+
+
+          <MenuItem icon={<MenuRoundedIcon style={{ cursor: "pointer" }} onClick={() => setCollapsed(!collapsed)} />}
+            style={{
+              backgroundColor: "inherit",
+            display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "20px 14px",
+            }}
           >
-            {!collapsed && <h2>GDG Management</h2>}
-          </MenuItem>
-          
-          <MenuItem icon={<AddIcon />} component={<Link to="/create-gdg" />}>{!collapsed && "Create GDG Base"}</MenuItem>
-          <MenuItem icon={<ListIcon />} component={<Link to="/list-generations" />}>{!collapsed && "List Generations"}</MenuItem>
-          <SubMenu label={!collapsed ? "GDG Maintenance" : ""} icon={<EditIcon />}>
-            <MenuItem icon={<EditIcon />} component={<Link to="/modify-attributes" />}>{!collapsed && "Modify Attributes"}</MenuItem>
-            <MenuItem icon={<DeleteIcon />} component={<Link to="/delete-generation" />}>{!collapsed && "Delete Generation or Base"}</MenuItem>
-            <MenuItem icon={<RenameIcon />} component={<Link to="/rename-gdg" />}>{!collapsed && "Rename GDG Base"}</MenuItem>
+          {!collapsed && <h2 style={{ fontSize: "1.5rem",  textAlign: "center", color: "#0d47a1" }}>GDG Management</h2>}
+         </MenuItem>
+
+
+          {["/create-gdg", "/list-generations", "/view-metadata", "/archive-generations", "/add-transaction-logs", "/graphical-representation"].map((path, index) => {
+            const labels = [
+              "Create GDG Base",
+              "List Generations",
+              "View Metadata",
+              "Archive Generations",
+              "Add Transaction Logs",
+              "Graphical Representation",
+            ];
+            const icons = [<AddIcon />, <ListIcon />, <MetadataIcon />, <ArchiveIcon />, <AddIcon />, <GraphIcon />];
+            return (
+              <MenuItem key={path} icon={icons[index]} component={<Link to={path} />} style={menuItemStyles(path)}>
+                {!collapsed && labels[index]}
+              </MenuItem>
+            );
+          })}
+
+          <SubMenu label={!collapsed ? "GDG Maintenance" : ""} icon={<EditIcon />}  style={{ backgroundColor: "transparent", color: "#0d47a1" }} >
+            {["/modify-attributes", "/delete-generation", "/rename-gdg"].map((path, index) => {
+              const labels = ["Modify Attributes", "Delete Generation or Base", "Rename GDG Base"];
+              const icons = [<EditIcon />, <DeleteIcon />, <RenameIcon />];
+              return (
+                <MenuItem key={path} icon={icons[index]} component={<Link to={path} />} style={menuItemStyles(path)}>
+                  {!collapsed && labels[index]}
+                </MenuItem>
+              );
+            })}
           </SubMenu>
-          <MenuItem icon={<MetadataIcon />} component={<Link to="/view-metadata" />}>{!collapsed && "View Metadata"}</MenuItem>
-          <MenuItem icon={<ArchiveIcon />} component={<Link to="/archive-generations" />}>{!collapsed && "Archive Generations"}</MenuItem>
-          <MenuItem icon={<AddIcon />} component={<Link to="/add-transaction-logs" />}>{!collapsed && "Add Transaction Logs"}</MenuItem>
-          <MenuItem icon={<GraphIcon />} component={<Link to="/graphical-representation" />}>{!collapsed && "Graphical Representation"}</MenuItem>
         </Menu>
       </Sidebar>
 
@@ -71,23 +96,23 @@ const App = () => {
         sx={{
           flexGrow: 1,
           p: 3,
-          backgroundColor: "#f8fbff",
+          backgroundColor: "transparent",
           minHeight: "100vh",
-          marginLeft: collapsed ? "100px" : "240px",
+          marginLeft: collapsed ? "70px" : "240px", 
           transition: "margin-left 0.3s ease",
         }}
       >
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create-gdg" element={<CreateGDG />} />
-          <Route path="/list-generations" element={<ListGenerations />} />
-          <Route path="/modify-attributes" element={<ModifyAttributes />} />
-          <Route path="/delete-generation" element={<DeleteGeneration />} />
-          <Route path="/rename-gdg" element={<RenameGDG />} />
-          <Route path="/view-metadata" element={<ViewMetadata />} />
-          <Route path="/archive-generations" element={<ArchiveGenerations />} />
-          <Route path="/add-transaction-logs" element={<AddTransactionLogs />} />
-          <Route path="/graphical-representation" element={<GraphicalRepresentation />} />
+          <Route path="/" element={<h1>Welcome to GDG Management Tool</h1>} />
+          <Route path="/create-gdg" element={<h1>Create GDG Base</h1>} />
+          <Route path="/list-generations" element={<h1>List Generations</h1>} />
+          <Route path="/modify-attributes" element={<h1>Modify Attributes</h1>} />
+          <Route path="/delete-generation" element={<h1>Delete Generation or Base</h1>} />
+          <Route path="/rename-gdg" element={<h1>Rename GDG Base</h1>} />
+          <Route path="/view-metadata" element={<h1>View Metadata</h1>} />
+          <Route path="/archive-generations" element={<h1>Archive Generations</h1>} />
+          <Route path="/add-transaction-logs" element={<h1>Add Transaction Logs</h1>} />
+          <Route path="/graphical-representation" element={<h1>Graphical Representation</h1>} />
         </Routes>
       </Box>
     </Box>
