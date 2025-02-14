@@ -11,22 +11,22 @@ const Topbar = ({ collapsed }) => {
         alignItems: "center",
         justifyContent: "space-between",
         background: "linear-gradient(145deg, #e3f2fd, #bbdefb)", 
-        padding: "12px 20px", // ✅ Slightly reduced padding
+        padding: "12px 20px", 
         borderRadius: "16px",
         boxShadow: "4px 8px 20px rgba(0,0,0,0.2)", 
         margin: "15px",
         marginLeft: collapsed ? "40px" : "100px", 
         marginRight: "15px",
-        height: "40px", // ✅ Reduced height
+        height: "40px", 
         transition: "margin-left 0.3s ease, width 0.3s ease",
       }}
     >
       {/* Left Section - User Profile */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-        <Avatar src="/profile.jpg" alt="User" sx={{ width: 35, height: 35 }} /> {/* ✅ Smaller Avatar */}
+        <Avatar src="/profile.jpg" alt="User" sx={{ width: 35, height: 35 }} />
         <Box>
-          <Typography variant="caption" color="gray">Welcome back!</Typography> {/* ✅ Smaller text */}
-          <Typography variant="body2" sx={{ fontWeight: "bold", color: "#0d47a1" }}>John Doe</Typography> {/* ✅ Reduced font size */}
+          <Typography variant="caption" color="gray">Welcome back!</Typography> 
+          <Typography variant="body2" sx={{ fontWeight: "bold", color: "#0d47a1" }}>Sreejita Dutta</Typography> 
         </Box>
       </Box>
 
@@ -35,22 +35,22 @@ const Topbar = ({ collapsed }) => {
         <IconButton sx={{ 
           color: "#0d47a1", 
           background: "white", 
-          borderRadius: "50%",  // ✅ Circular buttons
-          width: 32, height: 32, // ✅ Reduced size
+          borderRadius: "50%",  
+          width: 32, height: 32, 
           display: "flex", justifyContent: "center", alignItems: "center",
           boxShadow: "2px 4px 8px rgba(0,0,0,0.15)"
         }}>
-          <NotificationsIcon sx={{ fontSize: 18 }} /> {/* ✅ Smaller icon */}
+          <NotificationsIcon sx={{ fontSize: 18 }} />
         </IconButton>
         <IconButton sx={{ 
           color: "#0d47a1", 
           background: "white", 
-          borderRadius: "50%", // ✅ Circular buttons
-          width: 32, height: 32, // ✅ Reduced size
+          borderRadius: "50%",
+          width: 32, height: 32, 
           display: "flex", justifyContent: "center", alignItems: "center",
           boxShadow: "2px 4px 8px rgba(0,0,0,0.15)"
         }}>
-          <SettingsIcon sx={{ fontSize: 18 }} /> {/* ✅ Smaller icon */}
+          <SettingsIcon sx={{ fontSize: 18 }} /> 
         </IconButton>
       </Box>
     </Box>

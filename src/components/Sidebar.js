@@ -30,7 +30,10 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
       rootStyles={{
         "& .ps-sidebar-container": {
           height: "100vh",
-          minHeight: "100vh",
+          minHeight: "100vh", 
+          position: "fixed",
+          top: 0, 
+          left: 0,
           width: collapsed ? "70px" : "280px",
           background: "linear-gradient(145deg, #e3f2fd, #bbdefb)",
           borderRadius: "16px",
@@ -38,6 +41,9 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
           margin: "20px",
           padding: collapsed ? "10px" : "20px",
           transition: "width 0.3s ease, padding 0.3s ease",
+          overflowY: "auto",
+          scrollbarWidth: "thin", 
+    
         },
       }}
     >

@@ -8,7 +8,7 @@ const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <Box sx={{ display: "flex", background: "linear-gradient(135deg,rgb(211, 226, 247), #e3f2fd, #d1e8ff)", minHeight: "100vh" }}>
+    <Box sx={{ display: "flex", background: "#fff", minHeight: "100vh" }}>
       <SidebarComponent collapsed={collapsed} setCollapsed={setCollapsed} />
       
       
@@ -22,7 +22,7 @@ const MainLayout = () => {
             p: 3,
             backgroundColor: "transparent",
             minHeight: "100vh",
-            marginLeft: collapsed ? "70px" : "240px", 
+            marginLeft: collapsed ? "30px" : "90px", 
             // marginTop: "100px", 
             transition: "margin-left 0.3s ease",
           }} 
