@@ -39,7 +39,12 @@ const CreateGDG = () => {
       if (response.ok) {
         setMessage({ type: "success", text: "GDG Base created successfully!" });
         setGdgName("");
+        setLimit("LIMIT");
         setLimitValue("");
+        setScratch("SCRATCH");
+        setPurge("PURGE");
+        setOrder("FIFO");
+        setEmpty("EMPTY");
       } else {
         setMessage({ type: "error", text: result.message || "Error creating GDG Base" });
       }
@@ -52,6 +57,13 @@ const CreateGDG = () => {
 
   return (
     <Box sx={{ width: "100%", maxWidth: "1200px", margin: "auto", padding: 3 }}>
+
+      {/* Display Success or Error Message */}
+      {message && (
+        <Alert severity={message.type} sx={{ mb: 2 }}>
+          {message.text}
+        </Alert>
+      )}
       
       <Box sx={{ mb: 3 }}>
       <Typography variant="h4" sx={{ fontWeight: "bold", color: "#0D47A1", textAlign: "left" }}>
