@@ -10,14 +10,14 @@ const Topbar = ({ collapsed }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        background: "linear-gradient(145deg, #e3f2fd, #bbdefb)", 
+        background: "white", 
         padding: "12px 20px", 
         borderRadius: "16px",
         boxShadow: "4px 8px 20px rgba(0,0,0,0.2)", 
-        margin: "15px",
+        marginTop: "20px",
         marginLeft: collapsed ? "40px" : "100px", 
         marginRight: "15px",
-        height: "40px", 
+        height: "45px", 
         transition: "margin-left 0.3s ease, width 0.3s ease",
       }}
     >
@@ -26,7 +26,7 @@ const Topbar = ({ collapsed }) => {
         <Avatar src="/profile.jpg" alt="User" sx={{ width: 35, height: 35 }} />
         <Box>
           <Typography variant="caption" color="gray">Welcome back!</Typography> 
-          <Typography variant="body2" sx={{ fontWeight: "bold", color: "#0d47a1" }}>Sreejita Dutta</Typography> 
+          <Typography variant="body1" sx={{ fontWeight: "bold", color: "#0d47a1" }}>Sreejita Dutta</Typography> 
         </Box>
       </Box>
 

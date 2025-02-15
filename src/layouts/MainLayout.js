@@ -8,7 +8,7 @@ const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <Box sx={{ display: "flex", background: "#fff", minHeight: "100vh" }}>
+    <Box sx={{ display: "flex", background: "#F5F5F5" , minHeight: "100vh" }}>
       <SidebarComponent collapsed={collapsed} setCollapsed={setCollapsed} />
       
       
@@ -19,11 +19,12 @@ const MainLayout = () => {
           component="main"
           sx={{
             flexGrow: 1,
-            p: 3,
+            pl: 1,
+            pr:3,
             backgroundColor: "transparent",
             minHeight: "100vh",
             marginLeft: collapsed ? "30px" : "90px", 
-            // marginTop: "100px", 
+            marginRight: "15px", 
             transition: "margin-left 0.3s ease",
           }} 
         >

@@ -5,7 +5,6 @@ import {
 
 const CreateGDG = () => {
   const [gdgName, setGdgName] = useState("");
-  const [owner, setOwner] = useState(""); // Added owner field
   const [limit, setLimit] = useState("LIMIT");
   const [limitValue, setLimitValue] = useState("");
   const [scratch, setScratch] = useState("SCRATCH");
@@ -21,16 +20,12 @@ const CreateGDG = () => {
       setMessage({ type: "error", text: "GDG Base Name is required!" });
       return;
     }
-    if (!owner.trim()) {
-      setMessage({ type: "error", text: "Owner is required!" });
-      return;
-    }
     if (limit === "LIMIT" && !limitValue.trim()) {
       setMessage({ type: "error", text: "Please enter a version limit!" });
       return;
     }
 
-    const gdgData = { gdgName, owner, limit, limitValue, scratch, purge, order, empty };
+    const gdgData = { gdgName, limit, limitValue, scratch, purge, order, empty };
     setLoading(true);
 
     try {
@@ -44,7 +39,6 @@ const CreateGDG = () => {
       if (response.ok) {
         setMessage({ type: "success", text: "GDG Base created successfully!" });
         setGdgName("");
-        setOwner(""); // Reset Owner field
         setLimitValue("");
       } else {
         setMessage({ type: "error", text: result.message || "Error creating GDG Base" });
@@ -57,37 +51,38 @@ const CreateGDG = () => {
   };
 
   return (
-    <Box sx={{ width: "100%", maxWidth: "1200px", margin: "auto", padding: 3, pr: 10 }}>
+    <Box sx={{ width: "100%", maxWidth: "1200px", margin: "auto", padding: 3 }}>
       
-      <Typography variant="h4" sx={{ marginBottom: 2, textAlign: "center" }}>Create GDG Base</Typography>
+      <Box sx={{ mb: 3 }}>
+      <Typography variant="h4" sx={{ fontWeight: "bold", color: "#0D47A1", textAlign: "left" }}>
+        Create GDG Base
+      </Typography>
+      <Typography variant="body1" color="textSecondary" sx={{ textAlign: "left", mt: 0.5 }}>
+      Quickly set up your GDG base with intuitive, easy-to-configure options
+      </Typography>
+    </Box>
 
       <form onSubmit={handleSubmit}>
         {/* GDG Base Name */}
+        <Typography variant="h6" sx={{ mt: 3}}>
+          GDG Base Name
+        </Typography>
         <TextField
           fullWidth
-          label="Enter GDG Base Name"
+          placeholder="Enter your GDG base name" 
           value={gdgName}
           onChange={(e) => setGdgName(e.target.value)}
           margin="normal"
           required
-        />
-
-        {/* Owner Field */}
-        <TextField
-          fullWidth
-          label="Enter Owner Name"
-          value={owner}
-          onChange={(e) => setOwner(e.target.value)}
-          margin="normal"
-          required
+          InputLabelProps={{ shrink: false }} 
         />
 
         {/* LIMIT/NOLIMIT in Card Format */}
         <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>LIMIT/NOLIMIT</Typography>
         <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
           {[
-            { value: "LIMIT", title: "Fixed Limit", desc: "Set a specific version limit." },
-            { value: "NOLIMIT", title: "No Limit", desc: "Allow unlimited versions." },
+            { value: "LIMIT", title: "LIMIT", desc: "Set a specific version limit." },
+            { value: "NOLIMIT", title: "NOLIMIT", desc: "Allow unlimited versions." },
           ].map((option) => (
             <Paper
               key={option.value}
@@ -184,6 +179,37 @@ const CreateGDG = () => {
             </Paper>
           ))}
         </Stack>
+
+        {/* LIFO/FIFO */}
+        <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>FIFO/LIFO</Typography>
+        <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+          {[
+            { value: "FIFO", title: "FIFO", desc: "First In, First Out order." },
+            { value: "LIFO", title: "LIFO", desc: "Last In, First Out order." },
+          ].map((option) => (
+            <Paper
+              key={option.value}
+              sx={{
+                p: 2,
+                flex: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                border: order === option.value ? "2px solid #1976d2" : "1px solid #ccc",
+                cursor: "pointer",
+                transition: "0.3s",
+              }}
+              onClick={() => setOrder(option.value)}
+            >
+              <Box>
+                <Typography variant="subtitle1">{option.title}</Typography>
+                <Typography variant="body2" color="textSecondary">{option.desc}</Typography>
+              </Box>
+              <Radio checked={order === option.value} />
+            </Paper>
+          ))}
+        </Stack>
+
 
         {/* EMPTY/NOEMPTY */}
         <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>EMPTY/NOEMPTY</Typography>

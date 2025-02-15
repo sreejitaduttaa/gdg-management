@@ -16,8 +16,8 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
   const location = useLocation();
 
   const menuItemStyles = (path) => ({
-    backgroundColor: location.pathname === path ? "#0d47a1" : "inherit",
-    color: location.pathname === path ? "#fff" : "#0d47a1",
+    backgroundColor: location.pathname === path ? "#FF5001" : "inherit",
+    color: location.pathname === path ? "#fff" : "#333",  
     borderRadius: "8px",
     margin: "5px 5px",
     padding: "10px 10px",
@@ -36,7 +36,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
           top: 0, 
           left: 0,
           width: collapsed ? "70px" : "280px",
-          background: "linear-gradient(145deg, #e3f2fd, #bbdefb)",
+          background: "white",
           borderRadius: "16px",
           boxShadow: "4px 8px 20px rgba(0,0,0,0.2)",
           margin: "20px",
@@ -73,7 +73,7 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
           );
         })}
 
-        <SubMenu label={!collapsed ? "GDG Maintenance" : ""} icon={<EditIcon />} style={{ backgroundColor: "transparent", color: "#0d47a1" }}>
+        <SubMenu label={!collapsed ? "GDG Maintenance" : ""} icon={<EditIcon style={{ color: "#333" }} />} style={{ backgroundColor: "transparent", color: "#333" }}>
           {["/modify-attributes", "/delete-generation", "/rename-gdg"].map((path, index) => {
             const labels = ["Modify Attributes", "Delete Generation or Base", "Rename GDG Base"];
             const icons = [<EditIcon />, <DeleteIcon />, <RenameIcon />];
