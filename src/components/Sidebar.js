@@ -10,6 +10,7 @@ import MetadataIcon from "@mui/icons-material/Info";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import AddIcon from "@mui/icons-material/Add";
 import GraphIcon from "@mui/icons-material/BarChart";
+import logo from "../assets/logo.png";
 
 const SidebarComponent = ({ collapsed, setCollapsed }) => {
   const location = useLocation();
@@ -48,12 +49,18 @@ const SidebarComponent = ({ collapsed, setCollapsed }) => {
       }}
     >
       <Menu>
-        <MenuItem
-          icon={<MenuRoundedIcon style={{ cursor: "pointer" }} onClick={() => setCollapsed(!collapsed)} />}
-          style={{ backgroundColor: "inherit", display: "flex", justifyContent: "center", alignItems: "center", padding: "20px 14px" }}
-        >
-          {!collapsed && <h2 style={{ fontSize: "1.5rem", textAlign: "center", color: "#0d47a1" }}>GDG Management</h2>}
-        </MenuItem>
+
+      <MenuItem
+        icon={<MenuRoundedIcon style={{ cursor: "pointer" }} onClick={() => setCollapsed(!collapsed)} />}
+        style={{ backgroundColor: "inherit", display: "flex", alignItems: "center", padding: "20px 14px" }}
+      >
+        {!collapsed && (
+          <div style={{ display: "flex", alignItems: "center", gap: "1px" }}>
+            <img src={logo} alt="Logo" style={{ width: "40px", height: "40px" }} />
+            <h2 style={{ fontSize: "1.5rem", color: "#0d47a1" }}>GDG Wizard</h2>
+          </div>
+        )}
+      </MenuItem>
 
         {["/create-gdg", "/list-generations", "/view-metadata", "/archive-generations", "/add-transaction-logs", "/graphical-representation"].map((path, index) => {
           const labels = ["Create GDG Base", "List Generations", "View Metadata", "Archive Generations", "Add Transaction Logs", "Graphical Representation"];

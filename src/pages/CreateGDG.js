@@ -5,6 +5,7 @@ import {
 
 const CreateGDG = () => {
   const [gdgName, setGdgName] = useState("");
+  const [owner, setOwner] = useState(""); // Added owner field
   const [limit, setLimit] = useState("LIMIT");
   const [limitValue, setLimitValue] = useState("");
   const [scratch, setScratch] = useState("SCRATCH");
@@ -20,12 +21,16 @@ const CreateGDG = () => {
       setMessage({ type: "error", text: "GDG Base Name is required!" });
       return;
     }
+    if (!owner.trim()) {
+      setMessage({ type: "error", text: "Owner is required!" });
+      return;
+    }
     if (limit === "LIMIT" && !limitValue.trim()) {
       setMessage({ type: "error", text: "Please enter a version limit!" });
       return;
     }
 
-    const gdgData = { gdgName, limit, limitValue, scratch, purge, order, empty };
+    const gdgData = { gdgName, owner, limit, limitValue, scratch, purge, order, empty };
     setLoading(true);
 
     try {
@@ -39,6 +44,7 @@ const CreateGDG = () => {
       if (response.ok) {
         setMessage({ type: "success", text: "GDG Base created successfully!" });
         setGdgName("");
+        setOwner(""); // Reset Owner field
         setLimitValue("");
       } else {
         setMessage({ type: "error", text: result.message || "Error creating GDG Base" });
@@ -53,7 +59,6 @@ const CreateGDG = () => {
   return (
     <Box sx={{ width: "100%", maxWidth: "1200px", margin: "auto", padding: 3, pr: 10 }}>
       
-
       <Typography variant="h4" sx={{ marginBottom: 2, textAlign: "center" }}>Create GDG Base</Typography>
 
       <form onSubmit={handleSubmit}>
@@ -63,6 +68,16 @@ const CreateGDG = () => {
           label="Enter GDG Base Name"
           value={gdgName}
           onChange={(e) => setGdgName(e.target.value)}
+          margin="normal"
+          required
+        />
+
+        {/* Owner Field */}
+        <TextField
+          fullWidth
+          label="Enter Owner Name"
+          value={owner}
+          onChange={(e) => setOwner(e.target.value)}
           margin="normal"
           required
         />
