@@ -10,12 +10,14 @@ import ViewMetadata from "./pages/ViewMetadata";
 import ArchiveGenerations from "./pages/ArchiveGenerations";
 import AddTransactionLogs from "./pages/AddTransactionLogs";
 import GraphicalRepresentation from "./pages/GraphicalRepresentation";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
+        <Route path="/profile" element={<ProfilePage/> } />
         <Route path="create-gdg" element={<CreateGDG />} />
         <Route path="list-generations" element={<ListGenerations />} />
         <Route path="modify-attributes" element={<ModifyAttributes />} />

@@ -28,46 +28,46 @@ const CreateGDG = () => {
     const gdgData = { gdgName, limit, limitValue, scratch, purge, order, empty };
     setLoading(true);
 
-    // setTimeout(() => {
-    //   setMessage({ type: "success", text: "GDG Base created successfully!" });
+    setTimeout(() => {
+      setMessage({ type: "success", text: "GDG Base created successfully!" });
   
-    //   setGdgName("");
-    //   setLimit("LIMIT");
-    //   setLimitValue("");
-    //   setScratch("SCRATCH");
-    //   setPurge("PURGE");
-    //   setOrder("FIFO");
-    //   setEmpty("EMPTY");
+      setGdgName("");
+      setLimit("LIMIT");
+      setLimitValue("");
+      setScratch("SCRATCH");
+      setPurge("PURGE");
+      setOrder("FIFO");
+      setEmpty("EMPTY");
   
-    //   setLoading(false);
-    // }, 1000);
-
-    try {
-      const response = await fetch("/api/create-gdg", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(gdgData),
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        setMessage({ type: "success", text: "GDG Base created successfully!" });
-        
-        setGdgName("");
-        setLimit("LIMIT");
-        setLimitValue("");
-        setScratch("SCRATCH");
-        setPurge("PURGE");
-        setOrder("FIFO");
-        setEmpty("EMPTY");
-      } else {
-        setMessage({ type: "error", text: result.message || "Error creating GDG Base" });
-      }
-    } catch (error) {
-      setMessage({ type: "error", text: "Network error. Try again!" });
-    } finally {
       setLoading(false);
-    }
+    }, 1000);
+
+    // try {
+    //   const response = await fetch("/api/create-gdg", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(gdgData),
+    //   });
+
+    //   const result = await response.json();
+    //   if (response.ok) {
+    //     setMessage({ type: "success", text: "GDG Base created successfully!" });
+        
+    //     setGdgName("");
+    //     setLimit("LIMIT");
+    //     setLimitValue("");
+    //     setScratch("SCRATCH");
+    //     setPurge("PURGE");
+    //     setOrder("FIFO");
+    //     setEmpty("EMPTY");
+    //   } else {
+    //     setMessage({ type: "error", text: result.message || "Error creating GDG Base" });
+    //   }
+    // } catch (error) {
+    //   setMessage({ type: "error", text: "Network error. Try again!" });
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
